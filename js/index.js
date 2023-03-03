@@ -18,6 +18,8 @@ function handleLogin(e) {
     return;
   } else {
     loginInput.classList.add(HIDDEN_CLASSNAME);
+    clock.classList.remove(HIDDEN_CLASSNAME);
+
     setGreetingMsg();
     localStorage.setItem(USERNAME_KEY, loginInput.value);
   }
