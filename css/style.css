@@ -8,6 +8,7 @@ body {
   height: 100%;
   text-shadow: 0 1px 5px rgb(0 0 0 / 10%);
   font: sans-serif;
+  color: #ffffff;
 }
 
 .main {
@@ -17,7 +18,6 @@ body {
 
 #clock {
   font-size: 168px;
-  color: #ffffff;
   margin: auto;
   display: block;
 }
@@ -25,13 +25,11 @@ body {
 #showName {
   font-size: 54px;
   font-family: Arial, Helvetica, sans-serif;
-  color: #ffffff;
   font-weight: 500;
 }
 
 footer .message {
   font-size: 18px;
-  color: #ffffff;
   text-align: center;
 }
 ul {
