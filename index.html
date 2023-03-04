@@ -7,20 +7,41 @@
     <link rel="stylesheet" href="css/style.css" />
     <title>Momentum</title>
   </head>
-  <body>
-    <form id="login-form">
-      <input
-        type="text"
-        id="login"
-        placeholder="이름을 입력해주세요"
-        maxlength="15"
-        required
-      />
-      <input type="submit" value="login" class="hidden" />
-      <div id="clock" class="hidden"></div>
-      <div id="showName"></div>
-    </form>
+  <body class="main">
+    <header>
+      <div id="weather">
+        <span></span>
+        <span></span>
+      </div>
+    </header>
+    <article>
+      <div class="login_area">
+        <form id="login-form">
+          <input
+            type="text"
+            id="login"
+            placeholder="What is your name?"
+            maxlength="15"
+            required
+          />
+          <input type="submit" value="login" class="hidden" />
+          <div id="clock" class="hidden"></div>
+          <span id="showName" class="hidden"></span>
+        </form>
+      </div>
+      <div>
+        <form id="todo-form">
+          <input type="text" placeholder="What is your todo?" />
+        </form>
+        <ul id="todo-list"></ul>
+      </div>
+    </article>
+    <footer>
+      <p class="message">blahblahblah</p>
+    </footer>
     <script src="js/index.js"></script>
     <script src="js/clock.js"></script>
+    <script src="js/todo.js"></script>
+    <script src="js/background.js"></script>
   </body>
 </html>
