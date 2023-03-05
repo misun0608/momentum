@@ -8,7 +8,6 @@ const todoInput = document.querySelector("#todo-form input");
 const todoList = document.querySelector("#todo-list");
 
 const TODOS_KEY = "todos";
-console.log(todoInput);
 
 let todos = [];
 
@@ -36,15 +35,49 @@ function printTodos(newtodo) {
   const label = document.createElement("label");
   label.htmlFor = input.id;
   label.innerText = newtodo.content;
+
+  const checkbox = document.querySelector("input[type=checkbox]");
+  console.log(`checkbox: ${checkbox}`);
+  // checkbox.addEventListener("change", drawLine);
+
+  const btn = document.createElement("button");
+  btn.classList.add("delBtn");
+  btn.innerText = "del";
+
+  btn.addEventListener("click", deleteTodo);
+
   todo_li.appendChild(input);
   todo_li.appendChild(label);
+  todo_li.appendChild(btn);
   todoList.appendChild(todo_li);
+}
+
+function drawLine(box) {
+  if (this.checked) {
+    this.classList.add("line");
+  } else {
+    this.classList.remove("line");
+  }
 }
 
 function saveTodo() {
   localStorage.setItem(TODOS_KEY, JSON.stringify(todos));
 }
 
-function deleteTodo(event) {}
+function deleteTodo(event) {
+  console.log(event.target.parentElement.innerText);
+  const li = event.target.parentElement;
+  li.remove();
+  todos = todos.filter((todo) => todo.id !== parseInt(li.id));
+  saveTodo();
+}
 
 todoForm.addEventListener("submit", handleSubmit);
+
+const savedToDos = localStorage.getItem(TODOS_KEY);
+
+if (savedToDos !== null) {
+  const parsedToDos = JSON.parse(savedToDos);
+  todos = parsedToDos;
+  parsedToDos.forEach(printTodos);
+}

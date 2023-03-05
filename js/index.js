@@ -1,6 +1,9 @@
 const loginForm = document.querySelector("#login-form");
 const loginInput = document.querySelector("#login");
 const username = document.querySelector("#showName");
+const todo = document.querySelector("#todo-container");
+const question = document.querySelector(".question");
+const clock = document.querySelector("#clock");
 
 const HIDDEN_CLASSNAME = "hidden";
 const USERNAME_KEY = "username";
@@ -12,17 +15,29 @@ const GREETING_MSG = {
 };
 
 function handleLogin(e) {
+  console.log(loginInput.value);
   e.preventDefault();
   if (loginInput.value === null) {
     alert("이름을 입력해주세요");
-    return;
   } else {
     loginInput.classList.add(HIDDEN_CLASSNAME);
+    getTime();
+    setInterval(getTime, 1000);
     clock.classList.remove(HIDDEN_CLASSNAME);
-
     setGreetingMsg();
     localStorage.setItem(USERNAME_KEY, loginInput.value);
+
+    todo.classList.remove(HIDDEN_CLASSNAME);
+    question.classList.add(HIDDEN_CLASSNAME);
   }
+}
+
+function getTime() {
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+  const seconds = String(now.getSeconds()).padStart(2, "0");
+  clock.innerHTML = `${hours}:${minutes}:${seconds}`;
 }
 
 /**
