@@ -54,9 +54,7 @@ function printTodos(newtodo) {
 }
 
 function drawLine(event) {
-  console.log(event);
   const checkedBox = event.target.id;
-  console.log(event.target.id);
   if (event.target.checked === true) {
     event.target.nextSibling.classList.add("line");
     localStorage.setItem(checkedBox, JSON.stringify(event.target.checked));
@@ -75,6 +73,8 @@ function deleteTodo(event) {
   const li = event.target.parentElement;
   li.remove();
   todos = todos.filter((todo) => todo.id !== parseInt(li.id));
+  const keyId = String(parseInt(event.target.parentElement.id) + 1);
+  localStorage.removeItem(keyId);
   saveTodo();
 }
 
@@ -90,13 +90,11 @@ if (savedToDos !== null) {
 }
 
 function printCheck(e) {
-  console.log(`e ${e.id}`);
   const id = e.id + 1;
   const savedCheck = localStorage.getItem(String(id));
   if (savedCheck !== null) {
     const checkedInput = document.getElementById(`${id}`);
     const checkedLabel = document.querySelector(`label[for="${id}"]`);
-    console.log(`checked ${checkedInput.value}`);
     checkedInput.checked = true;
     checkedLabel.classList.add("line");
   }
