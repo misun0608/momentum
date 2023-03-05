@@ -48,7 +48,6 @@ function printTodos(newtodo) {
   todoList.appendChild(todo_li);
 
   const checkboxes = document.querySelectorAll("input[type=checkbox]");
-  console.log(checkboxes);
   checkboxes.forEach((checkbox) => {
     checkbox.addEventListener("change", drawLine);
   });
@@ -56,12 +55,15 @@ function printTodos(newtodo) {
 
 function drawLine(event) {
   console.log(event);
+  const checkedBox = event.target.id;
+  console.log(event.target.id);
   if (event.target.checked === true) {
     event.target.nextSibling.classList.add("line");
+    localStorage.setItem(checkedBox, JSON.stringify(event.target.checked));
   } else {
     event.target.nextSibling.classList.remove("line");
+    localStorage.removeItem(checkedBox);
   }
-  saveTodo();
 }
 
 function saveTodo() {
@@ -84,4 +86,18 @@ if (savedToDos !== null) {
   const parsedToDos = JSON.parse(savedToDos);
   todos = parsedToDos;
   parsedToDos.forEach(printTodos);
+  parsedToDos.forEach(printCheck);
+}
+
+function printCheck(e) {
+  console.log(`e ${e.id}`);
+  const id = e.id + 1;
+  const savedCheck = localStorage.getItem(String(id));
+  if (savedCheck !== null) {
+    const checkedInput = document.getElementById(`${id}`);
+    const checkedLabel = document.querySelector(`label[for="${id}"]`);
+    console.log(`checked ${checkedInput.value}`);
+    checkedInput.checked = true;
+    checkedLabel.classList.add("line");
+  }
 }
