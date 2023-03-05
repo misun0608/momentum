@@ -36,10 +36,6 @@ function printTodos(newtodo) {
   label.htmlFor = input.id;
   label.innerText = newtodo.content;
 
-  const checkbox = document.querySelector("input[type=checkbox]");
-  console.log(`checkbox: ${checkbox}`);
-  // checkbox.addEventListener("change", drawLine);
-
   const btn = document.createElement("button");
   btn.classList.add("delBtn");
   btn.innerText = "del";
@@ -50,14 +46,22 @@ function printTodos(newtodo) {
   todo_li.appendChild(label);
   todo_li.appendChild(btn);
   todoList.appendChild(todo_li);
+
+  const checkboxes = document.querySelectorAll("input[type=checkbox]");
+  console.log(checkboxes);
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", drawLine);
+  });
 }
 
-function drawLine(box) {
-  if (this.checked) {
-    this.classList.add("line");
+function drawLine(event) {
+  console.log(event);
+  if (event.target.checked === true) {
+    event.target.nextSibling.classList.add("line");
   } else {
-    this.classList.remove("line");
+    event.target.nextSibling.classList.remove("line");
   }
+  saveTodo();
 }
 
 function saveTodo() {

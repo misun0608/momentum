@@ -156,4 +156,5 @@ input[type="checkbox"] {
 
 .line {
   text-decoration: line-through;
+  opacity: 0.5;
 }
